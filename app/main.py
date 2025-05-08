@@ -1,18 +1,28 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+import asyncio
+
+from app.bot.Client import BotClient
+
 import discord
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as', self.user)
+from app.config.env_config import get_settings
 
-    async def on_message(self, message):
-        # don't respond to ourselves
-        if message.author == self.user:
-            return
+config = get_settings()
 
-        if message.content == 'ping':
-            await message.channel.send('pong')
 
-intents = discord.Intents.default()
-intents.message_content = True
-client = MyClient(intents=intents)
-client.run('token')
+async def main():
+    intents = discord.Intents.default()
+    intents.message_content = True
+    client = BotClient(intents=intents)
+    await client.start(config.discord_bot_token)
+
+
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("프로그램이 종료되었습니다.")
