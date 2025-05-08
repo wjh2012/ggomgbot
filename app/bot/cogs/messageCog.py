@@ -1,3 +1,5 @@
+import re
+
 from discord.ext import commands
 
 
@@ -10,8 +12,13 @@ class MessageCog(commands.Cog):
         if message.author.bot:
             return
 
-        if "안녕" in message.content:
-            await message.channel.send("안녕하세요!")
+        if message.content.startswith(self.bot.command_prefix):
+            return
+
+        content = message.content.lower()
+
+        if re.search(r"\b(ㅈㅈ|ww|gg)\b", content):
+            await message.channel.send("ㅈㅈ!")
 
 
 async def setup(bot):

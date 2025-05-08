@@ -5,7 +5,7 @@ class GreetCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(name="안녕", help="인사합니다.")
     async def hello(self, ctx):
         await ctx.send("안녕하세요! 👋")
 
