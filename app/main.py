@@ -3,9 +3,9 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-import asyncio
+from app.bot.command_bot import CommandBot
 
-from app.bot.Client import BotClient
+import asyncio
 
 import discord
 
@@ -17,8 +17,9 @@ config = get_settings()
 async def main():
     intents = discord.Intents.default()
     intents.message_content = True
-    client = BotClient(intents=intents)
-    await client.start(config.discord_bot_token)
+    # bot = ClientBot(intents=intents)
+    bot = CommandBot(command_prefix="!", intents=intents)
+    await bot.start(config.discord_bot_token)
 
 
 if __name__ == "__main__":
