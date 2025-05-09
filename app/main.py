@@ -1,9 +1,14 @@
 import os
 import sys
 
-from discord.ext import commands
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from app.ai.openai_api.openai_client import OpenAiClient
+
+from discord.ext import commands
+from openai import AsyncOpenAI
+
 
 from app.bot.command_bot import CommandBot
 
@@ -23,7 +28,10 @@ async def main():
     bot = CommandBot(
         command_prefix="!", help_command=commands.DefaultHelpCommand(), intents=intents
     )
-    await bot.start(config.discord_bot_token)
+    client = AsyncOpenAI(api_key=config.openai_api_key)
+    openai_client = OpenAiClient(client)
+    await openai_client.chat()
+    # await bot.start(config.discord_bot_token)
 
 
 if __name__ == "__main__":
