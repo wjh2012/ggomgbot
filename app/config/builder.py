@@ -6,10 +6,10 @@ from openai import AsyncOpenAI
 
 from app.config.env_config import Settings, get_settings
 from app.infrastructure.openai.openai_client import OpenAiClient
-from app.core.application.chat_service import ChatService
+from app.application.chat_service import ChatService
 from app.infrastructure.discord.bot_controller import DiscordBotController
-from app.core.application.bot_service import BotService
-from app.interface.discord_bot_adapter import DiscordBotAdapter
+from app.application import BotService
+from app.domain.interface import DiscordBotAdapter
 
 
 def configure_logging(level: str):

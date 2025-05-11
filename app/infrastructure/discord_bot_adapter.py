@@ -1,7 +1,7 @@
-from app.core.port.outbound.bot_port import BotPort
+from app.application.ports.outbound.nickname_port import NickNamePort
 
 
-class DiscordBotController(BotPort):
+class DiscordBotAdapter(NickNamePort):
     def __init__(self):
         self.bot = None
 

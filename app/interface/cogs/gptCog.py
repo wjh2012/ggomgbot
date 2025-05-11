@@ -11,13 +11,13 @@ class GptCog(commands.Cog):
         if message.author == self.bot.user:
             return
 
-        if message.content.startswith("철수"):
-            query = message.content.replace("철수", "", 1).strip()
-            response = await self.chat_service.ask(
-                user_id=str(message.author.id),
-                message=query,
-                channel_id=str(message.channel.id),
-            )
+        response = await self.chat_service.on_message(
+            user_id=str(message.author.id),
+            message=message.content,
+            channel_id=str(message.channel.id),
+        )
+
+        if response:
             await message.channel.send(response)
 
 
