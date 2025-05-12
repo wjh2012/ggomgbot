@@ -1,7 +1,7 @@
 from app.application.ports.outbound.nickname_port import NickNamePort
 
 
-class DiscordBotAdapter(NickNamePort):
+class DiscordNicknameAdapter(NickNamePort):
     def __init__(self):
         self.bot = None
 
